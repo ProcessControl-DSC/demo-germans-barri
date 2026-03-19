@@ -126,17 +126,11 @@ class ContainerPlanning(models.Model):
     )
     moves2transit_ids = fields.Many2many(
         comodel_name="stock.move",
-        relation="container_planning_moves2transit_rel",
-        column1="container_id",
-        column2="move_id",
         compute="_compute_moves",
         string="Productos a tránsito",
     )
     moves2stock_ids = fields.Many2many(
         comodel_name="stock.move",
-        relation="container_planning_moves2stock_rel",
-        column1="container_id",
-        column2="move_id",
         compute="_compute_moves",
         string="Productos a existencias",
     )
@@ -147,9 +141,6 @@ class ContainerPlanning(models.Model):
     )
     regularization_picking_ids = fields.Many2many(
         comodel_name="stock.picking",
-        relation="container_planning_reg_picking_rel",
-        column1="container_id",
-        column2="picking_id",
         compute="_compute_pickings",
         string="Albaranes regularizaciones",
     )
