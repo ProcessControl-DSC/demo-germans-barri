@@ -433,7 +433,7 @@
                     string="Confirmado"
                     domain="[('state', '=', 'confirmed')]"
                 />
-                <group name="group_by" expand="1" string="Agrupar por">
+                <group name="group_by" string="Agrupar por">
                     <filter
                         name="group_name"
                         string="Contenedor"
