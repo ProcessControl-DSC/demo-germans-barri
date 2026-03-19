@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_price_per_kg" model="ir.ui.view">
+        <field name="name">sale.order.form.price.per.kg</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='price_unit']" position="after">
+                <field name="price_per_kg"
+                       string="Precio/kg"
+                       optional="show"
+                       decoration-muted="price_per_kg == 0"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
