@@ -35,7 +35,7 @@
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_normal_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_open_quants']" position="after">
+            <xpath expr="//button[@name='action_view_stock_move_lines']" position="before">
                 <button
                     class="oe_stat_button"
                     name="dummy_action"
