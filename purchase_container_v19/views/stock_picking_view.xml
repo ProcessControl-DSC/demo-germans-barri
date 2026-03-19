@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form_inherit" model="ir.ui.view">
+        <field name="name">view.picking.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field
+                    name="container_number"
+                    invisible="location_dest_usage != 'transit'"
+                />
+                <field name="location_dest_usage" invisible="1" />
+            </field>
+            <field name="partner_id" position="after">
+                <field
+                    name="container_id"
+                    invisible="location_dest_usage != 'transit'"
+                />
+                <field
+                    name="force_container_id"
+                    invisible="location_dest_usage != 'transit'"
+                    groups="base.group_system"
+                />
+            </field>
+            <field name="scheduled_date" position="attributes">
+                <attribute name="readonly">id == False or picking_type_code in ['incoming', 'internal']</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

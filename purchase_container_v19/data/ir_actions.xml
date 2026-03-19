@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="action_cancel_pending_incoming_moves" model="ir.actions.server">
+        <field name="name">Cancelar movimientos pendientes | No recibir</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="purchase.model_purchase_order_line" />
+        <field name="binding_model_id" ref="purchase.model_purchase_order_line" />
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_manager'))]" />
+        <field name="state">code</field>
+        <!-- prettier-ignore-start -->
+        <field name="code">
+# Esta acción está pensada para cancelar movimientos pendientes tanto en recepciones en 1 paso como mas de uno.
+# Para recepciones un paso el albarán será supplier -> internal y se cancelará todo lo que no esté validado.
+# Para mas de un paso el albarán que entrará al filtro será el primero supplier -> transit y se cancelará todo lo que no esté validado. Esto no cancela otros parciales de un movimientos que hayan
+# podido validarse ya pero que tengan un destino pendiente. Sí cancela todos los destinos del movimiento que se cancela.
+
+for line in records:
+  for move in line.move_ids:
+    if move.location_id.usage == "supplier" and (move.location_dest_id.usage == 'transit' or move.location_dest_id.usage == 'internal') and move.state not in ['done', 'cancel']:
+      move._action_cancel()
+        </field>
+        <!-- prettier-ignore-end -->
+    </record>
+    <record id="action_create_container_planning_line" model="ir.actions.server">
+        <field name="name">Crear líneas contenedores</field>
+        <field name="model_id" ref="purchase_container.model_container_planning" />
+        <field
+            name="binding_model_id"
+            ref="purchase_container.model_container_planning"
+        />
+        <field name="state">code</field>
+        <field name="code">records._create_container_planning_line()</field>
+    </record>
+</odoo>

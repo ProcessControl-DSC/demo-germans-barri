@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="container_planning_size_tree" model="ir.ui.view">
+        <field name="name">container.planning.size.tree</field>
+        <field name="model">container.planning.size</field>
+        <field name="arch" type="xml">
+            <list editable="top">
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_container_planning_size" model="ir.actions.act_window">
+        <field name="name">Capacidades</field>
+        <field name="res_model">container.planning.size</field>
+    </record>
+    <menuitem
+        id="menu_container_planning_root"
+        name="Contenedores"
+        parent="purchase.menu_purchase_config"
+        groups="purchase.group_purchase_manager"
+    />
+    <menuitem
+        id="menu_container_planning_size"
+        name="Capacidades"
+        parent="menu_container_planning_root"
+        action="action_container_planning_size"
+    />
+</odoo>

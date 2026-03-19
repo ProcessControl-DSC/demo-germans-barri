@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="intrastat_code_view_form_inherit" model="ir.ui.view">
+        <field name="name">account.intrastat.code.view.form.inherit</field>
+        <field name="model">account.intrastat.code</field>
+        <field name="inherit_id" ref="account_intrastat.view_report_intrastat_code_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group>
+                    <field name="has_cost_percent" />
+                    <field
+                        name="cost_percent"
+                        invisible="not has_cost_percent"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

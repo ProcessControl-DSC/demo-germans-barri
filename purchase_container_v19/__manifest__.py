@@ -1,0 +1,42 @@
+# Copyright 2025 Process Control
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+{
+    "name": "Gestión de contenedores",
+    "author": "Process Control",
+    "website": "https://www.processcontrol.es",
+    "license": "LGPL-3",
+    "category": "Purchases",
+    "version": "19.0.1.0.0",
+    "depends": [
+        "account",
+        "purchase_push_link",
+        "stock_picking_batch",
+        "stock_picking_volume",
+        "stock_split_picking_by_origin",
+        "product_qty_base",
+        "intrastat_landed_cost_oca",
+    ],
+    "data": [
+        "data/ir_actions.xml",
+        "data/ir_rule.xml",
+        "data/res_groups.xml",
+        "security/ir.model.access.csv",
+        "security/groups.xml",
+        "views/product.xml",
+        "views/res_partner_view.xml",
+        "views/res_company_view.xml",
+        "views/container_planning_view.xml",
+        "views/container_planning_size.xml",
+        "views/stock_picking_view.xml",
+        "views/stock_picking_type_view.xml",
+        "views/stock_location_view.xml",
+        "views/stock_move_view.xml",
+        "views/stock_warehouse_view.xml",
+        "views/purchase_order.xml",
+        "views/purchase_order_line_view.xml",
+        "views/purchase_order_line_state_view.xml",
+        "views/container_planning_line_view.xml",
+    ],
+    "installable": True,
+}

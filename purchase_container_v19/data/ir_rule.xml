@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="purchase_container_multicompany" model="ir.rule">
+        <field name="name">Multicompañía en contenedores</field>
+        <field ref="model_container_planning" name="model_id" />
+        <field name="domain_force">
+            ['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]
+        </field>
+        <field name="perm_write" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_unlink" eval="1" />
+    </record>
+</odoo>

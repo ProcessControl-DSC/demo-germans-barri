@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_stock_container_tree_inherit" model="ir.ui.view">
+        <field name="name">product.stock.mrp.tree.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product_qty_base.product_stock_tree_inherit" />
+        <field name="arch" type="xml">
+            <field name="qty_reserved" position="after">
+                <field
+                    name="qty_preincoming"
+                    sum="Total presp. compra"
+                    optional="show"
+                />
+                <field
+                    name="qty_incoming_intransit"
+                    sum="Total comprado"
+                    optional="show"
+                />
+                <field name="qty_intransit" sum="Total tránsito" optional="show" />
+            </field>
+            <field name="virtual_available" position="after">
+                <field name="next_input_qty" sum="Total entrada" optional="show" />
+                <field name="next_input_date" optional="show" />
+            </field>
+        </field>
+    </record>
+    <record id="product_search_form_view" model="ir.ui.view">
+        <field name="name">product.product.search</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view" />
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="next_input_date" />
+            </field>
+            <filter name="consumable" position="after">
+                <filter
+                    string="Proxima recepción"
+                    name="filter_to_transit"
+                    domain="[('next_input_date','!=',False)]"
+                />
+                <filter
+                    string="Recepciones atrasadas"
+                    name="filter_delayed_transit"
+                    domain="[('next_input_date', '&lt;', time.strftime('%Y-%m-%d'))]"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>

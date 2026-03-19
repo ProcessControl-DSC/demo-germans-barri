@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <record id="container_planning_line_view_form" model="ir.ui.view">
+        <field name="name">container.planning.line.form</field>
+        <field name="model">container.planning.line</field>
+        <field name="arch" type="xml">
+            <form string="Movimientos destino">
+                <sheet>
+                    <group>
+                        <field
+                            name="move_dest_ids"
+                            string="Movimientos destino"
+                            readonly="1"
+                        >
+                            <list>
+                                <field name="location_id" />
+                                <field name="location_dest_id" />
+                                <field name="product_uom_qty" />
+                                <field name="state" />
+                            </list>
+                        </field>
+                    </group>
+                    <footer>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_container_planning_ling_tree" model="ir.ui.view">
+        <field name="name">container.planning.line.tree</field>
+        <field name="model">container.planning.line</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name" column_invisible="1" />
+                <field name="container_id" optional="show" />
+                <field name="state" optional="show" />
+                <field name="arrival_date" optional="show" />
+                <field name="product_id" optional="show" />
+                <field name="purchase_id" optional="show" />
+                <field name="picking_id" optional="show" />
+                <field name="product_uom_qty" optional="show" />
+                <field name="qty_done_transit" optional="show" />
+                <field name="qty_done_stock" optional="show" />
+                <field name="pending_qty" optional="show" />
+                <button
+                    name="action_view_moves_dest"
+                    type="object"
+                    icon="fa-info"
+                    title="Info movimientos dest."
+                />
+            </list>
+        </field>
+    </record>
+    <record id="view_container_planning_ling_search" model="ir.ui.view">
+        <field name="name">container.planning.line.search</field>
+        <field name="model">container.planning.line</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="Pendiente de recibir contenedores">
+                <field name="container_id" />
+                <field name="product_id" />
+                <field name="purchase_id" />
+                <separator />
+                <filter
+                    string="Ptd. descarga"
+                    name="state_pending"
+                    domain="[('state', '!=', 'download')]"
+                />
+                <separator />
+                <filter
+                    string="Cantidad pendiente"
+                    name="qty_pending_filter"
+                    domain="[('pending_qty', '&gt;', 0)]"
+                />
+                <filter
+                    name="container_id"
+                    string="Contenedor"
+                    domain="[]"
+                    context="{'group_by':'container_id'}"
+                />
+                <filter
+                    name="state"
+                    string="Estado"
+                    domain="[]"
+                    context="{'group_by':'state'}"
+                />
+                <filter
+                    name="product_id"
+                    string="Producto"
+                    domain="[]"
+                    context="{'group_by':'product_id'}"
+                />
+            </search>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="act_open_container_planning_ling_view">
+        <field name="name">Pendiente de recibir contenedores</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">container.planning.line</field>
+        <field name="view_mode">list</field>
+        <field name="search_view_id" ref="view_container_planning_ling_search" />
+        <!-- prettier-ignore-start -->
+        <field name="domain">[('container_id', '!=', False), ('move_transit_id.state', '!=', 'cancel')]</field>
+        <!-- prettier-ignore-end -->
+        <field name="context">
+            {
+            'search_default_qty_pending_filter': 1,
+            'search_default_state_pending': 1
+            }
+        </field>
+    </record>
+    <menuitem
+        id="menu_container_planning_ling_config"
+        name="Pendiente de recibir contenedores"
+        parent="purchase_container_menu"
+        sequence="120"
+        action="act_open_container_planning_ling_view"
+        groups="purchase_container.group_container_planning_line"
+    />
+</odoo>

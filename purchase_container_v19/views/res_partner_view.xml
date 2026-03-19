@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_partner_container_form" model="ir.ui.view">
+        <field name="name">res.partner.container.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Contacto">
+                <div class="oe_title">
+                    <label for="name" />
+                    <h1>
+                        <field name="name" default_focus="1" placeholder="Nombre" />
+                    </h1>
+                </div>
+                <group col="4">
+                    <field name="phone" />
+                    <field name="mobile" />
+                    <field name="email" widget="email" />
+                    <field name="type" invisible="1" />
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

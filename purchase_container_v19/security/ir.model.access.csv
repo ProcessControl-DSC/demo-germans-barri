@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_container_planning_user,container.planning user,model_container_planning,purchase.group_purchase_user,1,0,0,0
+access_container_planning_admin,container.planning admin,model_container_planning,purchase.group_purchase_manager,1,1,1,1
+access_container_planning_regularization_user,container.planning.regularization user,model_container_planning_regularization,purchase.group_purchase_user,1,0,0,0
+access_container_planning_regularization_admin,container.planning.regularization admin,model_container_planning_regularization,purchase.group_purchase_manager,1,1,1,1
+access_purchase_order_line_state,purchase.order.line.state,model_purchase_order_line_state,purchase.group_purchase_user,1,1,1,1
+access_container_planning_size_user,container.planning.size user,model_container_planning_size,base.group_user,1,0,0,0
+access_container_planning_size_admin,container.planning.size admin,model_container_planning_size,purchase.group_purchase_manager,1,1,1,1
+access_container_planning_line_admin,container.planning.line admin,model_container_planning_line,purchase.group_purchase_manager,1,1,1,1
+access_container_planning_line_user,container.planning.line user,model_container_planning_line,base.group_user,1,1,0,0

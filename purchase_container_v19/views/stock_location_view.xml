@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_location_form_container" model="ir.ui.view">
+        <field name="name">view.location.form.container</field>
+        <field name="model">stock.location</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="stock.view_location_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='usage']" position="after">
+                <field
+                    name="container_required"
+                    invisible="usage != 'transit'"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

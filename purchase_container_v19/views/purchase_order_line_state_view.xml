@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="purchase_order_line_state_tree" model="ir.ui.view">
+        <field name="name">purchase.order.line.state.tree</field>
+        <field name="model">purchase.order.line.state</field>
+        <field name="arch" type="xml">
+            <list editable="top">
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+    <record id="purchase_order_line_state_search" model="ir.ui.view">
+        <field name="name">purchase.order.line.state.search</field>
+        <field name="model">purchase.order.line.state</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+    <record id="action_purchase_order_line_state" model="ir.actions.act_window">
+        <field name="name">Estados para la recepción de mercancía</field>
+        <field name="res_model">purchase.order.line.state</field>
+    </record>
+    <menuitem
+        id="menu_purchase_order_line_state"
+        action="action_purchase_order_line_state"
+        parent="purchase.menu_purchase_config"
+        sequence="17"
+    />
+</odoo>

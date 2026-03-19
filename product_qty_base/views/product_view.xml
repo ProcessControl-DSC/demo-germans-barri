@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_stock_tree_inherit" model="ir.ui.view">
+        <field name="name">product.stock.tree.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.view_stock_product_tree" />
+        <field name="priority" eval="100" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='virtual_available']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='qty_available']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="qty_available" position="after">
+                <field name="qty_real" sum="Total stock" optional="show" />
+                <field name="qty_reserved" sum="Total reservado" optional="show" />
+                <field name="qty_production" sum="Total fabricación" optional="show" />
+                <field name="qty_returned" sum="Total devoluciones" optional="show" />
+                <field
+                    name="qty_available_now"
+                    sum="Total disp. inmediata"
+                    optional="show"
+                />
+                <field
+                    name="qty_real_available"
+                    sum="Total disp. largo plazo"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="name">product.product.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_open_quants']" position="after">
+                <button
+                    class="oe_stat_button"
+                    name="dummy_action"
+                    icon="fa-cubes"
+                    type="object"
+                    invisible="type != 'product'"
+                    groups="stock.group_stock_user"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field
+                                name="qty_available_now"
+                                widget="statinfo"
+                                nolabel="1"
+                                class="mr4"
+                            />
+                            <field name="uom_name" />
+                        </span>
+                        <span class="o_stat_text">Disp. inmediata</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath
+                expr="//button[@name='action_view_stock_move_lines']"
+                position="after"
+            >
+                <button
+                    string="Movimientos stock"
+                    type="object"
+                    name="action_view_stock_moves"
+                    invisible="type not in ['product', 'consu']"
+                    class="oe_stat_button"
+                    icon="fa-arrows-v"
+                    groups="stock.group_stock_user"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

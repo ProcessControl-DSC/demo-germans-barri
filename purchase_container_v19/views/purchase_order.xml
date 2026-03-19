@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='date_planned_div']//field[@name='date_planned']" position="attributes">
+                <attribute name="widget">date</attribute>
+                <attribute name="readonly">state not in ('draft', 'sent')</attribute>
+            </xpath>
+            <xpath expr="//div[@name='date_planned_div']" position="after">
+                <field name="picking_type_dest_usage" invisible="1" />
+                <field
+                    name="transit_days"
+                    invisible="picking_type_dest_usage != 'transit'"
+                />
+                <field
+                    name="date_service"
+                    widget="date"
+                    invisible="picking_type_dest_usage != 'transit'"
+                    force_save="1"
+                    readonly="1"
+                />
+            </xpath>
+            <xpath expr="//group[@name='other_info']" position="inside">
+                <field name="origin_port" />
+            </xpath>
+        </field>
+    </record>
+    <record id="purchase_order_view_tree" model="ir.ui.view">
+        <field name="name">purchase.order.view.tree.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_planned']" position="after">
+                <field name="date_service" optional="show" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

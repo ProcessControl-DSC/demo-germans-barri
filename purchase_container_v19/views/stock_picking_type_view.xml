@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_type_form_inherit" model="ir.ui.view">
+        <field name="name">view.picking.type.form.inherit</field>
+        <field name="model">stock.picking.type</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='second']" position="after">
+                <group name="containers">
+                    <group string="Contenedores">
+                        <field name="to_refund" />
+                        <field name="container_manual_location_dest" />
+                        <field name="merge_moves_keep_date" />
+                    </group>
+                    <group />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

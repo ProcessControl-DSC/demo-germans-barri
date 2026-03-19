@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="purchase_order_line_pending_arrival_tree" model="ir.ui.view">
+        <field name="name">purchase.order.line.pending.arrival.tree</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <list editable="top" create="0" delete="0">
+                <field name="order_id" readonly="1" optional="show" />
+                <field name="date_order" widget="date" optional="show" />
+                <field name="date_approve" widget="date" optional="show" />
+                <field name="date_planned" widget="date" readonly="1" optional="show" />
+                <field name="date_new" optional="show" widget="date" />
+                <field name="partner_id" optional="show" />
+                <field name="product_id" readonly="1" optional="show" />
+                <field name="product_qty" readonly="1" optional="show" />
+                <field name="qty_received" readonly="1" optional="show" />
+                <field name="qty_pending" optional="show" />
+                <field name="percent_pending" optional="show" />
+                <field name="price_unit" optional="show" />
+                <field name="pending_amount" optional="show" />
+                <field name="delay" optional="show" />
+                <field name="state2" optional="show" />
+                <field name="notes" optional="show" />
+                <field name="date_claim" optional="show" />
+                <field name="state" column_invisible="1" />
+            </list>
+        </field>
+    </record>
+    <record id="purchase_order_line_pending_arrival_search" model="ir.ui.view">
+        <field name="name">purchase.order.line.pending.arrival.search</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id" />
+                <field name="order_id" />
+                <field name="date_planned" />
+                <field name="date_new" />
+                <field name="partner_id" />
+                <field name="product_qty" />
+                <field name="qty_received" />
+                <field name="qty_pending" />
+                <field name="state2" />
+                <field name="notes" />
+                <separator />
+                <filter
+                    string="Confirmado"
+                    name="state_confirmed_filter"
+                    domain="[('state', '=', 'confirmed'), ('date_new', '&lt;=', ((context_today()).strftime('%Y-%m-%d'))), ('qty_pending', '&lt;=', 0)]"
+                />
+                <separator />
+                <filter
+                    string="Pendiente"
+                    name="pending_lines"
+                    domain="[('date_new', '&lt;=', ((context_today()).strftime('%Y-%m-%d')))]"
+                />
+                <separator />
+                <filter
+                    string="Cantidad pendiente"
+                    name="pending_qty"
+                    domain="[('qty_pending', '&gt;', 0)]"
+                />
+                <separator />
+                <filter
+                    string="No finalizado"
+                    name="not_finished"
+                    domain="[('state2', 'not ilike', 'finalizado')]"
+                />
+                <separator />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        string="Producto"
+                        name="group_product"
+                        domain="[]"
+                        context="{'group_by': 'product_id'}"
+                    />
+                    <filter
+                        string="Pedido"
+                        name="group_purchase"
+                        domain="[]"
+                        context="{'group_by': 'order_id'}"
+                    />
+                    <filter
+                        string="Fecha"
+                        name="group_date_planned"
+                        domain="[]"
+                        context="{'group_by': 'date_planned'}"
+                    />
+                    <filter
+                        string="Nueva fecha"
+                        name="group_date_new"
+                        domain="[]"
+                        context="{'group_by': 'date_new'}"
+                    />
+                    <filter
+                        string="Empresa"
+                        name="group_partner"
+                        domain="[]"
+                        context="{'group_by': 'partner_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record
+        id="action_purchase_order_line_pending_arrival"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Pendiente de recibir</field>
+        <field name="res_model">purchase.order.line</field>
+        <field name="context">
+            {
+                'search_default_pending_lines': 1,
+                'search_default_pending_qty': 1,
+                'search_default_not_finished': 1,
+            }
+        </field>
+        <field name="view_id" ref="purchase_order_line_pending_arrival_tree" />
+        <field name="search_view_id" ref="purchase_order_line_pending_arrival_search" />
+        <field name="domain">
+            [
+            ('state', 'not in', ['draft', 'sent', 'cancel'])
+        ]
+        </field>
+    </record>
+    <menuitem
+        id="menu_purchase_order_line_pending_arrival"
+        action="action_purchase_order_line_pending_arrival"
+        parent="purchase.menu_procurement_management"
+        sequence="16"
+    />
+</odoo>
