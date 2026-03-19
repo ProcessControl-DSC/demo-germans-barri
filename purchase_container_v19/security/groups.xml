@@ -4,5 +4,8 @@
         <record id="manage_container_costs" model="res.groups">
             <field name="name">Administrar coste contenedores</field>
         </record>
+        <record id="group_container_planning_line" model="res.groups">
+            <field name="name">Ver pendiente de recibir contenedores</field>
+        </record>
     </data>
 </odoo>

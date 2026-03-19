@@ -117,6 +117,6 @@
         parent="purchase_container_menu"
         sequence="120"
         action="act_open_container_planning_ling_view"
-        groups="purchase_container.group_container_planning_line"
+        groups="purchase_container_v19.group_container_planning_line"
     />
 </odoo>

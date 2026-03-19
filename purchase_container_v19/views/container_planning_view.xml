@@ -123,37 +123,37 @@
                                         name="cost_usd"
                                         options="{'currency_field': 'usd_currency_id'}"
                                         optional="show"
-                                        groups="purchase_container.manage_container_costs"
+                                        groups="purchase_container_v19.manage_container_costs"
                                     />
                                     <field
                                         name="cost_eur"
                                         options="{'currency_field': 'company_currency_id'}"
                                         optional="show"
-                                        groups="purchase_container.manage_container_costs"
+                                        groups="purchase_container_v19.manage_container_costs"
                                     />
                                     <field
                                         name="transport_cost"
                                         options="{'currency_field': 'company_currency_id'}"
                                         optional="show"
-                                        groups="purchase_container.manage_container_costs"
+                                        groups="purchase_container_v19.manage_container_costs"
                                     />
                                     <field
                                         name="customs_fees"
                                         options="{'currency_field': 'company_currency_id'}"
                                         optional="show"
-                                        groups="purchase_container.manage_container_costs"
+                                        groups="purchase_container_v19.manage_container_costs"
                                     />
                                     <field
                                         name="total_cost"
                                         options="{'currency_field': 'company_currency_id'}"
                                         optional="show"
-                                        groups="purchase_container.manage_container_costs"
+                                        groups="purchase_container_v19.manage_container_costs"
                                     />
                                     <field
                                         name="unit_cost"
                                         options="{'currency_field': 'company_currency_id'}"
                                         optional="show"
-                                        groups="purchase_container.manage_container_costs"
+                                        groups="purchase_container_v19.manage_container_costs"
                                     />
                                 </tree>
                             </field>
@@ -162,7 +162,7 @@
                                 <group colspan="4">
                                     <group
                                         class="oe_subtotal_footer oe_right"
-                                        groups="purchase_container.manage_container_costs"
+                                        groups="purchase_container_v19.manage_container_costs"
                                     >
                                         <separator string="Costes" />
                                         <button
@@ -175,12 +175,12 @@
                                         <field
                                             name="usd_currency_id"
                                             invisible="1"
-                                            groups="purchase_container.manage_container_costs"
+                                            groups="purchase_container_v19.manage_container_costs"
                                         />
                                         <field
                                             name="company_currency_id"
                                             invisible="1"
-                                            groups="purchase_container.manage_container_costs"
+                                            groups="purchase_container_v19.manage_container_costs"
                                         />
                                         <field
                                             name="transport_cost"
@@ -188,7 +188,7 @@
                                             class="oe_subtotal_footer_separator"
                                             widget="monetary"
                                             options="{'currency_field': 'company_currency_id'}"
-                                            groups="purchase_container.manage_container_costs"
+                                            groups="purchase_container_v19.manage_container_costs"
                                         />
                                         <field
                                             string="Tasa de cambio (1€)"
@@ -196,12 +196,12 @@
                                             name="currency_rate"
                                             widget="monetary"
                                             options="{'currency_field': 'company_currency_id'}"
-                                            groups="purchase_container.manage_container_costs"
+                                            groups="purchase_container_v19.manage_container_costs"
                                         />
                                         <field
                                             name="bank_expenses"
                                             colspan="2"
-                                            groups="purchase_container.manage_container_costs"
+                                            groups="purchase_container_v19.manage_container_costs"
                                         />
                                         <field
                                             name="cost_usd"
@@ -209,21 +209,21 @@
                                             class="oe_subtotal_footer_separator"
                                             widget="monetary"
                                             options="{'currency_field': 'usd_currency_id'}"
-                                            groups="purchase_container.manage_container_costs"
+                                            groups="purchase_container_v19.manage_container_costs"
                                         />
                                         <field
                                             name="cost_eur"
                                             colspan="2"
                                             widget="monetary"
                                             options="{'currency_field': 'company_currency_id'}"
-                                            groups="purchase_container.manage_container_costs"
+                                            groups="purchase_container_v19.manage_container_costs"
                                         />
                                         <field
                                             name="customs_fees"
                                             colspan="2"
                                             widget="monetary"
                                             options="{'currency_field': 'company_currency_id'}"
-                                            groups="purchase_container.manage_container_costs"
+                                            groups="purchase_container_v19.manage_container_costs"
                                         />
                                         <field
                                             name="total_cost"
@@ -231,7 +231,7 @@
                                             class="oe_subtotal_footer_separator"
                                             widget="monetary"
                                             options="{'currency_field': 'company_currency_id'}"
-                                            groups="purchase_container.manage_container_costs"
+                                            groups="purchase_container_v19.manage_container_costs"
                                         />
                                     </group>
                                 </group>
@@ -322,11 +322,11 @@
                                     <field name="ship_name" />
                                     <field
                                         name="shipping_partner_id"
-                                        context="{'form_view_ref': 'purchase_container.res_partner_container_form', 'default_type': 'shipping_company'}"
+                                        context="{'form_view_ref': 'purchase_container_v19.res_partner_container_form', 'default_type': 'shipping_company'}"
                                     />
                                     <field
                                         name="freight_forwarder_partner_id"
-                                        context="{'form_view_ref': 'purchase_container.res_partner_container_form', 'default_type': 'freight_forwarder'}"
+                                        context="{'form_view_ref': 'purchase_container_v19.res_partner_container_form', 'default_type': 'freight_forwarder'}"
                                     />
                                 </group>
                                 <group />
@@ -356,47 +356,47 @@
                 <field
                     name="usd_currency_id"
                     column_invisible="1"
-                    groups="purchase_container.manage_container_costs"
+                    groups="purchase_container_v19.manage_container_costs"
                 />
                 <field
                     name="company_currency_id"
                     column_invisible="1"
-                    groups="purchase_container.manage_container_costs"
+                    groups="purchase_container_v19.manage_container_costs"
                 />
                 <field
                     name="cost_usd"
                     options="{'currency_field': 'usd_currency_id'}"
                     optional="show"
-                    groups="purchase_container.manage_container_costs"
+                    groups="purchase_container_v19.manage_container_costs"
                 />
                 <field
                     name="currency_rate"
                     optional="show"
-                    groups="purchase_container.manage_container_costs"
+                    groups="purchase_container_v19.manage_container_costs"
                 />
                 <field
                     name="cost_eur"
                     options="{'currency_field': 'company_currency_id'}"
                     optional="show"
-                    groups="purchase_container.manage_container_costs"
+                    groups="purchase_container_v19.manage_container_costs"
                 />
                 <field
                     name="transport_cost"
                     options="{'currency_field': 'company_currency_id'}"
                     optional="show"
-                    groups="purchase_container.manage_container_costs"
+                    groups="purchase_container_v19.manage_container_costs"
                 />
                 <field
                     name="customs_fees"
                     options="{'currency_field': 'company_currency_id'}"
                     optional="show"
-                    groups="purchase_container.manage_container_costs"
+                    groups="purchase_container_v19.manage_container_costs"
                 />
                 <field
                     name="total_cost"
                     options="{'currency_field': 'company_currency_id'}"
                     optional="show"
-                    groups="purchase_container.manage_container_costs"
+                    groups="purchase_container_v19.manage_container_costs"
                 />
                 <field name="departure_date" />
                 <field name="arrival_date" />

@@ -56,7 +56,7 @@ class ContainerPlanningLine(models.Model):
             "res_model": "container.planning.line",
             "view_mode": "form",
             "view_id": self.env.ref(
-                "purchase_container.container_planning_line_view_form"
+                "purchase_container_v19.container_planning_line_view_form"
             ).id,
             "target": "new",
             "res_id": self.id,
