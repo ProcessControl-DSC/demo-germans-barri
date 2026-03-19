@@ -14,3 +14,7 @@
 	path = oca/stock-logistics-reporting
 	url = https://github.com/OCA/stock-logistics-reporting.git
 	branch = 19.0
+[submodule "oca/product-attribute"]
+	path = oca/product-attribute
+	url = https://github.com/OCA/product-attribute.git
+	branch = 19.0
