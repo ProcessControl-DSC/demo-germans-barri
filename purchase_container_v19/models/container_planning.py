@@ -124,12 +124,12 @@ class ContainerPlanning(models.Model):
         related="picking_ids.purchase_id",
         help="Campo técnico para poder buscar por pedido de compra",
     )
-    moves2transit_ids = fields.One2many(
+    moves2transit_ids = fields.Many2many(
         comodel_name="stock.move",
         compute="_compute_moves",
         string="Productos a tránsito",
     )
-    moves2stock_ids = fields.One2many(
+    moves2stock_ids = fields.Many2many(
         comodel_name="stock.move",
         compute="_compute_moves",
         string="Productos a existencias",
@@ -139,7 +139,7 @@ class ContainerPlanning(models.Model):
         inverse_name="container_id",
         string="Regularizaciones",
     )
-    regularization_picking_ids = fields.One2many(
+    regularization_picking_ids = fields.Many2many(
         comodel_name="stock.picking",
         compute="_compute_pickings",
         string="Albaranes regularizaciones",
