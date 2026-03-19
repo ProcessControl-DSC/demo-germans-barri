@@ -32,7 +32,7 @@
             <field name="categ_id" position="after">
                 <field name="next_input_date" />
             </field>
-            <filter name="consumable" position="after">
+            <filter name="goods" position="after">
                 <filter
                     string="Proxima recepción"
                     name="filter_to_transit"
