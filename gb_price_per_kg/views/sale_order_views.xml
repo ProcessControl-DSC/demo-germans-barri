@@ -5,10 +5,17 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='price_unit']" position="after">
+            <!-- Columna en la vista lista de líneas de pedido -->
+            <xpath expr="//field[@name='order_line']/list//field[@name='price_unit']" position="after">
                 <field name="price_per_kg"
                        string="Precio/kg"
                        optional="show"
+                       decoration-muted="price_per_kg == 0"/>
+            </xpath>
+            <!-- Campo en el formulario inline de la línea -->
+            <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
+                <field name="price_per_kg"
+                       string="Precio/kg"
                        decoration-muted="price_per_kg == 0"/>
             </xpath>
         </field>
