@@ -7,7 +7,7 @@ from odoo import api, models
 class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 
-    @api.depends("move_ids.state", "move_ids.quantity", "move_ids.product_uom")
+    @api.depends("move_ids.state", "move_ids.quantity", "move_ids.product_uom_id")
     def _compute_qty_received(self):
         from_stock_lines = self.filtered(
             lambda line: line.qty_received_method == "stock_moves"
@@ -20,9 +20,9 @@ class PurchaseOrderLine(models.Model):
                 if move.state == "done":
                     if move._is_purchase_return():
                         if not move.origin_returned_move_id or move.to_refund:
-                            total -= move.product_uom._compute_quantity(
+                            total -= move.product_uom_id._compute_quantity(
                                 move.quantity,
-                                line.product_uom,
+                                line.product_uom_id,
                                 rounding_method="HALF-UP",
                             )
                     elif (
@@ -46,9 +46,9 @@ class PurchaseOrderLine(models.Model):
                             or qty_method == "dropshipping"
                             and move.location_dest_id.usage == "customer"
                         ):
-                            total += move.product_uom._compute_quantity(
+                            total += move.product_uom_id._compute_quantity(
                                 move.quantity,
-                                line.product_uom,
+                                line.product_uom_id,
                                 rounding_method="HALF-UP",
                             )
             line._track_qty_received(total)
