@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Campo tara por bulto en la ficha de producto -->
+    <!-- Campo tara por bulto en la ficha de producto, junto al precio/kg -->
     <record id="view_product_template_tare" model="ir.ui.view">
         <field name="name">product.template.form.tare</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="priority">20</field>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='weight']" position="after">
-                <field name="tare_per_unit" string="Tara por bulto (kg)"/>
+            <xpath expr="//field[@name='show_price_per_kg']" position="after">
+                <field name="tare_per_unit"
+                       string="Tara por bulto (kg)"
+                       invisible="type == 'service'"
+                       help="Peso del embalaje por unidad (kg). Se usa para calcular automáticamente la tara total en recepciones y expediciones."/>
             </xpath>
         </field>
     </record>
