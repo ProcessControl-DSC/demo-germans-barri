@@ -27,7 +27,7 @@ class ProductProduct(models.Model):
         query = """
         WHERE l.usage = 'internal'
         AND sw.consider_stock IS TRUE
-        AND l.scrap_location IS FALSE
+        AND l.usage != 'inventory'
         AND (l.exclude_stock IS FALSE or l.exclude_stock IS NULL)
         AND q.product_id = %s
         AND l.company_id = {}""".format(
@@ -71,7 +71,7 @@ class ProductProduct(models.Model):
                 (
                     l.usage IN ('internal', 'view')
                     AND ld.usage IN ('customer', 'production', 'samples', 'transit')
-                    AND (sw.consider_stock IS TRUE AND l.scrap_location IS FALSE)
+                    AND (sw.consider_stock IS TRUE AND l.usage != 'inventory')
                     AND (l.exclude_stock IS FALSE OR l.exclude_stock IS NULL)
                 )
                 OR (
@@ -126,7 +126,7 @@ class ProductProduct(models.Model):
         AND ld.usage IN ('internal', 'view')
         AND m.company_id = {}
         AND sw.consider_stock IS TRUE
-        AND l.scrap_location IS FALSE
+        AND l.usage != 'inventory'
         AND (ld.exclude_stock IS FALSE or ld.exclude_stock IS NULL)""".format(
             tuple(lusages),
             self.env.context.get("force_sql_company", self.env.company.id),
@@ -163,7 +163,7 @@ class ProductProduct(models.Model):
             AND state NOT IN ('draft', 'cancel', 'done')
             AND l.usage IN ('production')
             AND m.company_id = {}
-            AND l.scrap_location IS FALSE""".format(
+            AND l.usage != 'inventory'""".format(
             self.env.context.get("force_sql_company", self.env.company.id)
         )
         wh_ids = self.env.context.get("sql_warehouse_ids", [])
@@ -237,7 +237,7 @@ class ProductProduct(models.Model):
         WHERE l.usage = 'internal'
         AND l.company_id = {}
         AND sw.consider_stock IS TRUE
-        AND l.scrap_location IS FALSE
+        AND l.usage != 'inventory'
         AND (l.exclude_stock IS FALSE or l.exclude_stock IS NULL)
         """.format(self.env.context.get("force_sql_company", self.env.company.id))
 
@@ -276,7 +276,7 @@ class ProductProduct(models.Model):
             (
                 l.usage IN ('internal', 'view')
                 AND ld.usage IN ('customer', 'production', 'samples', 'transit')
-                AND sw.consider_stock IS TRUE AND l.scrap_location IS FALSE
+                AND sw.consider_stock IS TRUE AND l.usage != 'inventory'
                 AND (l.exclude_stock IS FALSE OR l.exclude_stock IS NULL)
             )
             OR (
@@ -330,7 +330,7 @@ class ProductProduct(models.Model):
         AND l.usage IN {}
         AND ld.usage IN ('internal', 'view')
         AND sw.consider_stock IS TRUE
-        AND l.scrap_location IS FALSE
+        AND l.usage != 'inventory'
         AND (ld.exclude_stock IS FALSE or ld.exclude_stock IS NULL)
         """.format(
             self.env.context.get("force_sql_company", self.env.company.id),
@@ -379,7 +379,7 @@ class ProductProduct(models.Model):
         WHERE l.usage = 'internal'
         AND l.company_id = {}
         AND sw.consider_stock IS TRUE
-        AND l.scrap_location IS FALSE
+        AND l.usage != 'inventory'
         AND (l.exclude_stock IS FALSE or l.exclude_stock IS NULL)
         """.format(
             self.env.context.get("force_sql_company", self.env.company.id),
@@ -406,7 +406,7 @@ class ProductProduct(models.Model):
             (
                 l.usage IN ('internal', 'view')
                 AND ld.usage IN ('customer', 'production', 'samples', 'transit')
-                AND sw.consider_stock IS TRUE AND l.scrap_location IS FALSE
+                AND sw.consider_stock IS TRUE AND l.usage != 'inventory'
                 AND (l.exclude_stock IS FALSE OR l.exclude_stock IS NULL)
             )
             OR (
@@ -467,7 +467,7 @@ class ProductProduct(models.Model):
         return f"""{query}
         AND l.company_id = {company_id}
         AND sw.consider_stock IS TRUE
-        AND l.scrap_location IS FALSE
+        AND l.usage != 'inventory'
         AND (l.exclude_stock IS FALSE or l.exclude_stock IS NULL)
         """
 
@@ -506,7 +506,7 @@ class ProductProduct(models.Model):
             (
                 l.usage IN ('internal', 'view')
                 AND ld.usage IN ('customer', 'production', 'samples', 'transit')
-                AND sw.consider_stock IS TRUE AND l.scrap_location IS FALSE
+                AND sw.consider_stock IS TRUE AND l.usage != 'inventory'
                 AND (l.exclude_stock IS FALSE OR l.exclude_stock IS NULL)
             )
             OR (
@@ -522,7 +522,7 @@ class ProductProduct(models.Model):
                 AND ld.usage IN ('internal', 'view')
                 AND m.company_id = 1
                 AND swld.consider_stock IS TRUE
-                AND l.scrap_location IS FALSE
+                AND l.usage != 'inventory'
                 AND (ld.exclude_stock IS FALSE or ld.exclude_stock IS NULL)
             )
         """
