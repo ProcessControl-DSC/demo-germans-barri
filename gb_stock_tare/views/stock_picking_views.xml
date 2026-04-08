@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Campo tara por bulto en la ficha de producto, junto al precio/kg -->
+    <!-- Campo tara en ficha de producto, dentro del grupo hortofrutícola -->
     <record id="view_product_template_tare" model="ir.ui.view">
         <field name="name">product.template.form.tare</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="inherit_id" ref="gb_price_per_kg.view_product_template_form_price_per_kg"/>
         <field name="priority">20</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='show_price_per_kg']" position="after">
-                <field name="tare_per_unit"
-                       string="Tara por bulto (kg)"
-                       invisible="type == 'service'"
-                       help="Peso del embalaje por unidad (kg). Se usa para calcular automáticamente la tara total en recepciones y expediciones."/>
+                <field name="tare_per_unit" string="Tara por bulto (kg)"/>
             </xpath>
         </field>
     </record>
 
-    <!-- Columnas en operaciones detalladas del albarán (stock.move.line inline) -->
+    <!-- Columnas en operaciones detalladas del albarán -->
     <record id="view_stock_move_line_tare_tree" model="ir.ui.view">
         <field name="name">stock.move.line.tare.tree</field>
         <field name="model">stock.move.line</field>
@@ -32,7 +29,7 @@
         </field>
     </record>
 
-    <!-- Pestaña resumen de pesos en el formulario del albarán -->
+    <!-- Pestaña resumen de pesos en el albarán -->
     <record id="view_picking_form_tare" model="ir.ui.view">
         <field name="name">stock.picking.form.tare</field>
         <field name="model">stock.picking</field>
