@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Columnas bruto/tara/neto en operaciones detalladas del albarán -->
+    <!-- Campo tara por bulto en la ficha de producto -->
+    <record id="view_product_template_tare" model="ir.ui.view">
+        <field name="name">product.template.form.tare</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='weight']" position="after">
+                <field name="tare_per_unit" string="Tara por bulto (kg)"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Columnas en operaciones detalladas del albarán (stock.move.line inline) -->
     <record id="view_stock_move_line_tare_tree" model="ir.ui.view">
         <field name="name">stock.move.line.tare.tree</field>
         <field name="model">stock.move.line</field>
         <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='quantity']" position="before">
+                <field name="package_qty" string="Bultos" optional="show"/>
                 <field name="gross_weight" string="Bruto (kg)" optional="show"/>
-                <field name="tare_weight" string="Tara (kg)" optional="show"/>
+                <field name="tare_per_unit" string="Tara/bulto" optional="hide"/>
+                <field name="tare_weight" string="Tara (kg)" optional="show" readonly="1"/>
                 <field name="net_weight" string="Neto (kg)" optional="show" readonly="1"/>
             </xpath>
         </field>
@@ -25,12 +39,12 @@
                       invisible="not move_ids">
                     <group string="Totales por línea de movimiento">
                         <field name="move_ids" nolabel="1">
-                            <list string="Líneas">
+                            <list string="Resumen pesos" editable="bottom">
                                 <field name="product_id" readonly="1"/>
                                 <field name="product_uom_qty" readonly="1" string="Demanda"/>
-                                <field name="gross_weight_total" string="Bruto (kg)"/>
-                                <field name="tare_weight_total" string="Tara (kg)"/>
-                                <field name="net_weight_total" string="Neto (kg)"/>
+                                <field name="gross_weight_total" string="Bruto (kg)" readonly="1"/>
+                                <field name="tare_weight_total" string="Tara (kg)" readonly="1"/>
+                                <field name="net_weight_total" string="Neto (kg)" readonly="1"/>
                             </list>
                         </field>
                     </group>

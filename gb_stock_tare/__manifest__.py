@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Germans Barri - Gestión de Tara',
-    'version': '19.0.1.0.0',
-    'summary': 'Peso bruto, tara y peso neto en líneas de albarán',
+    'version': '19.0.2.0.0',
+    'summary': 'Tara automática por producto en recepciones y expediciones',
     'author': 'Process Control',
     'category': 'Inventory',
-    'depends': ['stock'],
+    'depends': ['stock', 'product'],
     'data': [
         'security/ir.model.access.csv',
         'views/stock_picking_views.xml',
